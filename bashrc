@@ -1,45 +1,6 @@
-if [ -f /etc/bash_completion ]; then
-	    . /etc/bash_completion
-fi
-
-xhost +local:root > /dev/null 2>&1
-
-complete -cf sudo
-
-if [ -e /usr/share/terminfo/x/xterm-256color ]; then
-    export TERM='xterm-256color'
-else
-    export TERM='xterm-color'
-fi
-
-shopt -s cdspell
-shopt -s checkwinsize
-shopt -s cmdhist
-shopt -s dotglob
-shopt -s expand_aliases
-shopt -s extglob
-shopt -s histappend
-shopt -s hostcomplete
-shopt -s nocaseglob
-
-export HISTSIZE=10000
-export HISTFILESIZE=${HISTSIZE}
-export HISTCONTROL=ignoreboth
-
-alias ls='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
-alias ll='ls -l --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
-alias la='ls -la --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
-alias grep='grep --color=tty -d skip'
-alias cp="cp -i"                          # confirm before overwriting something
-alias df='df -h'                          # human-readable sizes
-alias free='free -m'                      # show sizes in MB
-alias np='nano PKGBUILD'
-alias vi='vim'
-
 # ex - archive extractor
 # usage: ex <file>
-ex ()
-{
+ex () {
   if [ -f $1 ] ; then
     case $1 in
       *.tar.bz2)   tar xjf $1   ;;
@@ -60,13 +21,25 @@ ex ()
   fi
 }
 
-# prompt
 PS1='[\u@\h \W]\$ '
-BROWSER=/usr/bin/xdg-open
 
-export PATH=$HOME/local/bin:$PATH
-export PATH=$HOME/.gem/ruby/2.0.0/bin:$PATH
+# shopt -s cdspell
+# shopt -s checkwinsize
+# shopt -s cmdhist
+# shopt -s dotglob
+# shopt -s expand_aliases
+# shopt -s extglob
+# shopt -s histappend
+# shopt -s hostcomplete
+# shopt -s nocaseglob
 
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-export PATH=$HOME/.gem/ruby/2.0.0/bin:$PATH
+alias tmux='tmux -2'
+alias gs='git status'
+alias gds='git diff --ignore-space-change'
+alias gd='git diff'
+alias gsd='git diff --staged'
+
+# export GOPATH=$HOME/go
+# export PATH=$PATH:$GOPATH/bin
+
+export EDITOR=vim
