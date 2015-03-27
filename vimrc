@@ -1,57 +1,58 @@
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-Bundle 'tomasr/molokai'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'gmarik/vundle'
-Bundle 'scrooloose/nerdtree'
-Bundle 'tpope/vim-fugitive'
-Bundle 'bling/vim-airline'
-Bundle 'plasticboy/vim-markdown'
-Bundle 'corntrace/bufexplorer'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'tristen/vim-sparkup'
+" Proven Plugins
 
-filetype plugin indent on "needed for vundle
+Plugin 'gmarik/Vundle.vim'
+Plugin 'tomasr/molokai'
 
-" airline 
-let g:airline_powerline_fonts = 1
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-let g:airline_symbols.space = "\ua0"
+" Learning Plugins - I know these but could be more facile
 
-set sw=4
-syntax on
+Plugin 'scrooloose/nerdtree'
+Plugin 'mileszs/ack.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
-set autoindent
+" Plugins To Try (overwhelming to try too many at once...)
+
+"Plugin 'corntrace/bufexplorer'
+"Plugin 'bling/vim-airline'
+"Plugin 'kien/ctrlp.vim'
+"Plugin 'scrooloose/syntastic'
+"Plugin 'Lokaltog/vim-easymotion'
+"Plugin 'shawncplus/phpcomplete.vim'
+"Plugin 'scrooloose/nerdcommenter'
+
+call vundle#end()
+filetype plugin indent on
+
+" Search
+set incsearch
 set ignorecase
 set smartcase
-
-set backspace=indent,eol,start
-
-set ruler
-set laststatus=2
-
-set number
-set pastetoggle=<F11>
-set expandtab
-set tabstop=4
 set hlsearch
 
-set t_ut=
+set nu
+set laststatus=2
+set encoding=utf-8
 
+hi link EasyMotionTarget ErrorMsg
+hi link EasyMotionShade Comment
 
-" set relativenumber
-" set wrap
-" set numberwidth
+" Tabs as 4 spaces
+set expandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 set shiftround
-" set matchtime=10
-" set showmatch
-" let mapleader = "-"
+
+cabbrev W w
+cabbrev Tabe tabe
+cabbrev Wq x
+
 nnoremap <silent> <Space> :noh<CR>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
@@ -60,10 +61,6 @@ nnoremap <leader>nn :NERDTreeMirror<cr>
 nnoremap <leader>nf :NERDTreeFind<cr>
 nnoremap <leader>` :set paste!<cr>
 nnoremap ; :
-
-cabbrev W w
-cabbrev Tabe tabe
-cabbrev Wq x
 
 augroup general
     autocmd!
@@ -74,16 +71,38 @@ augroup general
     autocmd BufWritePost .vimrc source $HOME/.vimrc
 augroup END
 
-" experimental
+"  Go support
+"  TODO wrap this so it's only executed when go is installed
+set rtp+=$GOROOT/misc/vim
+autocmd BufWritePre *.go :Fmt
 
-" how to make this conditional, maybe a command line argument and alias to vi
-" would be good way to quickly check if configured
-" echo "        "
-" echo " ,.----."
-" echo "( > 'o' )> blotto says \"Welcome to ian's vim\""
-" echo " \\_____/"
-" echo "  |   |"
-" echo "  [>  [>"
+autocmd BufRead,BufNewFile *.go set filetype=go
+autocmd BufRead,BufNewFile *.go set makeprg=go\ build\ %
 
+let mapleader=";"
+nnoremap <leader><space> :
+nnoremap <silent> <leader>l :noh<CR>
+
+" === Nerdtree shorcuts === "
+nmap <leader>nt :NERDTree<CR>
+nmap <leader>nf :NERDTreeFind<CR>
+
+" Svn blame highlighted lines in visual mode
+vmap gl :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
+
+" not sure I'm really using this
+if has("gui_running")
+  if has("gui_gtk2")
+    set guifont=InconsolataForPowerline\ 11
+  elseif has("gui_macvim")
+    set guifont=Inconsolata\ Regular:h14
+  elseif has("gui_win32")
+    set guifont=Consolas:h11:cANSI
+  endif
+endif
+
+" Colors
 set t_Co=256
-colorscheme molokai
+if filereadable($HOME . "/.vim/bundle/molokai/colors/molokai.vim")
+  colorscheme molokai
+endif
