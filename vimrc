@@ -55,7 +55,7 @@ cabbrev W w
 cabbrev Tabe tabe
 cabbrev Wq x
 
-let mapleader="\\"
+let mapleader=";"
 nnoremap <silent> <leader>l :noh<CR>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
