@@ -18,9 +18,9 @@ git clone https://github.com/boombador/dotfiles.git ~/dev/dotfiles
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 # backup existing files and replace with symlinks to the repo
-cp --interactive ~/.bashrc ~/bashrc.bak
-cp --interactive ~/.vimrc ~/vimrc.bak
-cp --interactive ~/.tmux.conf ~/tmux.conf.bak
+if [ -e ~/.bashrc ]; then cp --interactive ~/.bashrc ~/bashrc.bak; fi
+if [ -e ~/.vimrc ]; then cp --interactive ~/.vimrc ~/vimrc.bak; fi
+if [ -e ~/.tmux.conf ]; then cp --interactive ~/.tmux.conf ~/tmux.conf.bak; fi
 ln -s ~/dev/dotfiles/bashrc .bashrc
 ln -s ~/dev/dotfiles/vimrc .vimrc
 ln -s ~/dev/dotfiles/tmux.conf .tmux.conf
