@@ -21,7 +21,7 @@ ex () {
   fi
 }
 
-# PS1='[\u@\h \W]\$ '
+PS1='[\u@\h \W]\$ '
 
 # shopt -s cdspell
 # shopt -s checkwinsize

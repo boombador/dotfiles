@@ -9,14 +9,15 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tomasr/molokai'
 
-" Learning Plugins - I know these but could be more facile
+" Learning Plugins
 
-Plugin 'scrooloose/nerdtree'
-Plugin 'mileszs/ack.vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'scrooloose/nerdtree'
+Plugin 'fatih/vim-go'
+Plugin 'mileszs/ack.vim'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
-" Plugins To Try (overwhelming to try too many at once...)
+" Plugins To Try
 
 "Plugin 'corntrace/bufexplorer'
 "Plugin 'bling/vim-airline'
@@ -53,14 +54,15 @@ cabbrev W w
 cabbrev Tabe tabe
 cabbrev Wq x
 
-nnoremap <silent> <Space> :noh<CR>
+let mapleader="\\"
+nnoremap <silent> <leader>l :noh<CR>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
-nnoremap <leader>nt :NERDTree<cr>
-nnoremap <leader>nn :NERDTreeMirror<cr>
-nnoremap <leader>nf :NERDTreeFind<cr>
 nnoremap <leader>` :set paste!<cr>
-nnoremap ; :
+
+nnoremap <leader>nt :NERDTreeToggle<CR>
+nnoremap <leader>nf :NERDTreeFind<CR>
+nnoremap <leader>nn :NERDTreeMirror<cr>
 
 augroup general
     autocmd!
@@ -68,7 +70,6 @@ augroup general
     autocmd FileType javascript iabbrev <buffer> iff if ()<left>
     autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
     autocmd BufRead *.md let tw=100
-    autocmd BufWritePost .vimrc source $HOME/.vimrc
 augroup END
 
 "  Go support
@@ -79,13 +80,6 @@ autocmd BufWritePre *.go :Fmt
 autocmd BufRead,BufNewFile *.go set filetype=go
 autocmd BufRead,BufNewFile *.go set makeprg=go\ build\ %
 
-let mapleader=";"
-nnoremap <leader><space> :
-nnoremap <silent> <leader>l :noh<CR>
-
-" === Nerdtree shorcuts === "
-nmap <leader>nt :NERDTree<CR>
-nmap <leader>nf :NERDTreeFind<CR>
 
 " Svn blame highlighted lines in visual mode
 vmap gl :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
