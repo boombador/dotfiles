@@ -11,6 +11,7 @@ Plugin 'tomasr/molokai'
 
 " Learning Plugins
 
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
 Plugin 'fatih/vim-go'

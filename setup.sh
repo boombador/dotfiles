@@ -10,17 +10,19 @@ for needed_command in $my_needed_commands; do
 done
 
 if ((missing_counter > 0)); then
-    printf "Minimum %d commands are missing in PATH, aborting\n" "$missing_counter" >&2
+    printf "%d required commands are missing in PATH, aborting\n" "$missing_counter" >&2
     exit 1
 fi
 
 git clone https://github.com/boombador/dotfiles.git ~/dev/dotfiles
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-# install files (maybe symlink is better?)
-# TODO: give notice for pre-existing files
-cp --interactive ~/dev/dotfiles/bashrc ~/.bashrc
-cp --interactive ~/dev/dotfiles/vimrc ~/.vimrc
-cp --interactive ~/dev/dotfiles/tmux.conf ~/.tmux.conf
+# backup existing files and replace with symlinks to the repo
+cp --interactive ~/.bashrc ~/bashrc.bak
+cp --interactive ~/.vimrc ~/vimrc.bak
+cp --interactive ~/.tmux.conf ~/tmux.conf.bak
+ln -s ~/dev/dotfiles/bashrc .bashrc
+ln -s ~/dev/dotfiles/vimrc .vimrc
+ln -s ~/dev/dotfiles/tmux.conf .tmux.conf
 
 vim +PluginInstall +qall
