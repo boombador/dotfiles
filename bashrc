@@ -44,3 +44,4 @@ alias gsd='git diff --staged | vim -'
 export EDITOR=vim
 export GOPATH=$HOME/gocode
 export PATH=$PATH:$HOME/local/apache-maven-3.2.5/bin:$HOME/dev/cors-configuration:$GOPATH/bin
+export PATH=$PATH:$HOME/dev/appengine-java-sdk-1.9.20/
