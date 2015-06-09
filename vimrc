@@ -18,6 +18,8 @@ Plugin 'fatih/vim-go'
 Plugin 'mileszs/ack.vim'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'pangloss/vim-javascript'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'yegappan/mru'
 
 " Plugins To Try
 
@@ -25,7 +27,6 @@ Plugin 'pangloss/vim-javascript'
 "Plugin 'bling/vim-airline'
 "Plugin 'kien/ctrlp.vim'
 "Plugin 'scrooloose/syntastic'
-"Plugin 'Lokaltog/vim-easymotion'
 "Plugin 'shawncplus/phpcomplete.vim'
 "Plugin 'scrooloose/nerdcommenter'
 
@@ -61,6 +62,7 @@ nnoremap <silent> <leader>l :noh<CR>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <leader>` :set paste!<cr>
+nnoremap <leader><space>  :MRU<cr>
 
 nnoremap <leader>nt :NERDTreeToggle<CR>
 nnoremap <leader>nf :NERDTreeFind<CR>
@@ -75,10 +77,7 @@ augroup general
 augroup END
 
 "  Go support
-"  TODO wrap this so it's only executed when go is installed
-set rtp+=$GOROOT/misc/vim
-autocmd BufWritePre *.go :Fmt
-
+" autocmd BufWritePre *.go :Fmt " needs to be installed
 autocmd BufRead,BufNewFile *.go set filetype=go
 autocmd BufRead,BufNewFile *.go set makeprg=go\ build\ %
 
