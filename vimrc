@@ -8,21 +8,26 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tomasr/molokai'
+Plugin 'pangloss/vim-javascript'
+Plugin 'scrooloose/nerdtree'
 
 " Learning Plugins
 
+Plugin 'tpope/vim-surround'
+Plugin 'claco/jasmine.vim'
+" Plugin 'nvie/vim-flake8'
+Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/nerdtree'
 Plugin 'fatih/vim-go'
 Plugin 'mileszs/ack.vim'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-Plugin 'pangloss/vim-javascript'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'yegappan/mru'
 
 " Plugins To Try
 
+" TRY THIS ONE
 "Plugin 'corntrace/bufexplorer'
 "Plugin 'bling/vim-airline'
 "Plugin 'kien/ctrlp.vim'
@@ -101,3 +106,6 @@ set t_Co=256
 if filereadable($HOME . "/.vim/bundle/molokai/colors/molokai.vim")
   colorscheme molokai
 endif
+
+" autocmd BufWritePost *.py call Flake8()
+let g:flake8_max_line_length=160
