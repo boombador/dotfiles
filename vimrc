@@ -13,6 +13,7 @@ Plugin 'scrooloose/nerdtree'
 
 " Learning Plugins
 
+Plugin 'tikhomirov/vim-glsl'
 Plugin 'tpope/vim-surround'
 Plugin 'claco/jasmine.vim'
 " Plugin 'nvie/vim-flake8'
@@ -24,6 +25,7 @@ Plugin 'mileszs/ack.vim'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'yegappan/mru'
+Plugin 'digitaltoad/vim-jade'
 
 " Plugins To Try
 
@@ -68,6 +70,8 @@ nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <leader>` :set paste!<cr>
 nnoremap <leader><space>  :MRU<cr>
+inoremap <cr> <esc>
+inoremap <esc> <nop>
 
 nnoremap <leader>nt :NERDTreeToggle<CR>
 nnoremap <leader>nf :NERDTreeFind<CR>
