@@ -48,3 +48,8 @@ export PATH="$PATH:/usr/local/apache-maven-3.3.1/bin:/opt/java/jdk1.7.0_79/bin"
 export MAVEN_HOME="/usr/local/apache-maven-3.3.1"
 export JAVA_HOME="/opt/java/jdk1.7.0_79/jre"
 
+# export PATH=$HOME/dev/cors-configuration
+# export PATH=$PATH:$GOPATH/bin
+# export PATH=$PATH:$HOME/dev/appengine-java-sdk-1.9.20/
+# export PATH=$PATH:/home/ian/bin/apache-maven-3.3.3/bin
+# export PATH=$PATH:$HOME/bin/gsutil
