@@ -44,12 +44,16 @@ alias gsd='git diff --staged | vim -'
 export EDITOR=vim
 export GOPATH=$HOME/gocode
 
-export PATH="$PATH:/usr/local/apache-maven-3.3.1/bin:/opt/java/jdk1.7.0_79/bin"
-export MAVEN_HOME="/usr/local/apache-maven-3.3.1"
-export JAVA_HOME="/opt/java/jdk1.7.0_79/jre"
+#export MAVEN_HOME="/usr/local/apache-maven-3.3.1"
+#export JAVA_HOME="/opt/java/jdk1.7.0_79/jre"
+export JAVA_HOME="/usr/lib/jvm/java-7-openjdk-amd64/jre"
 
 # export PATH=$HOME/dev/cors-configuration
 # export PATH=$PATH:$GOPATH/bin
 # export PATH=$PATH:$HOME/dev/appengine-java-sdk-1.9.20/
 # export PATH=$PATH:/home/ian/bin/apache-maven-3.3.3/bin
 # export PATH=$PATH:$HOME/bin/gsutil
+
+export NVM_DIR="/home/ian/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export PATH=$PATH:/home/ian/bin/apache-maven-3.3.3/bin
