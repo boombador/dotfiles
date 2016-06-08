@@ -41,6 +41,10 @@ Plugin 'digitaltoad/vim-jade'
 call vundle#end()
 filetype plugin indent on
 
+highlight colorcolumn ctermbg=235 guibg=#2c2d27
+" set textwidth=80
+set colorcolumn=+1,100
+
 " Search
 set incsearch
 set ignorecase
@@ -60,6 +64,8 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set shiftround
+
+set backupcopy=yes
 
 cabbrev W w
 cabbrev Tabe tabe
