@@ -33,24 +33,31 @@ ex () {
 # shopt -s hostcomplete
 # shopt -s nocaseglob
 
-alias tmux='tmux -2'
-alias ack='ack-grep'
-
+#alias tmux='tmux -2'
 alias gs='git status'
 alias gd='git diff --ignore-space-change | vim -'
 alias gds='git diff | vim -'
 alias gsd='git diff --staged | vim -'
+alias ll='ls -la'
 
 export EDITOR=vim
-export GOPATH=$HOME/gocode
+#export GOPATH=$HOME/gocode
 
-export JAVA_HOME="/usr/lib/jvm/java-7-openjdk-amd64/jre"
+#export JAVA_HOME="/usr/lib/jvm/java-7-openjdk-amd64/jre"
 
-export NVM_DIR="/home/ian/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+#export NVM_DIR="/home/ian/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-export PATH=$PATH:/home/ian/bin/apache-maven-3.3.3/bin
-export PATH=$PATH:/home/ian/bin/apache-maven-3.3.3/bin
+#source '/home/ian/google-cloud-sdk/path.bash.inc'
+#source '/home/ian/google-cloud-sdk/completion.bash.inc'
 
-source '/home/ian/google-cloud-sdk/path.bash.inc'
-source '/home/ian/google-cloud-sdk/completion.bash.inc'
+# if $(determine if apple); then
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+# else
+# this breaks mac, but is needed on linux
+# FIXME: need this back for linux
+#alias ack='ack-grep'
+#fi
+
+export VENUE_PORTAL_BACKEND='http://localhost:8001/api'
