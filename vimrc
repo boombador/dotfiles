@@ -4,46 +4,47 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" Proven Plugins
-
+" Passive upgrades
 Plugin 'gmarik/Vundle.vim'
-Plugin 'tomasr/molokai'
-Plugin 'pangloss/vim-javascript'
-Plugin 'scrooloose/nerdtree'
-
-" Learning Plugins
-
-Plugin 'tikhomirov/vim-glsl'
-Plugin 'digitaltoad/vim-pug'
-Plugin 'tpope/vim-surround'
-Plugin 'claco/jasmine.vim'
-" Plugin 'nvie/vim-flake8'
+Plugin 'bling/vim-airline'
 Plugin 'scrooloose/syntastic'
-Plugin 'scrooloose/nerdcommenter'
+
+" Interfaces
+Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
-Plugin 'fatih/vim-go'
+Plugin 'kien/ctrlp.vim'
+Plugin 'yegappan/mru'
+
+" Actions
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'mileszs/ack.vim'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'Lokaltog/vim-easymotion'
-Plugin 'yegappan/mru'
+Plugin 'tpope/vim-surround'
+
+" Language or Framework Syntax
+Plugin 'fatih/vim-go'
 Plugin 'digitaltoad/vim-jade'
+Plugin 'claco/jasmine.vim'
+Plugin 'digitaltoad/vim-pug'
+Plugin 'tikhomirov/vim-glsl'
+Plugin 'pangloss/vim-javascript'
+
+Plugin 'tomasr/molokai'
 
 " Plugins To Try
 
-" TRY THIS ONE
+"Plugin 'nvie/vim-flake8'
 "Plugin 'corntrace/bufexplorer'
-"Plugin 'bling/vim-airline'
-"Plugin 'kien/ctrlp.vim'
-"Plugin 'scrooloose/syntastic'
-"Plugin 'shawncplus/phpcomplete.vim'
-"Plugin 'scrooloose/nerdcommenter'
 
 call vundle#end()
 filetype plugin indent on
+syntax on
 
 highlight colorcolumn ctermbg=235 guibg=#2c2d27
 " set textwidth=80
 set colorcolumn=+1,100
+set background=dark
 
 " Search
 set incsearch
@@ -58,11 +59,11 @@ set encoding=utf-8
 hi link EasyMotionTarget ErrorMsg
 hi link EasyMotionShade Comment
 
-" Tabs as 4 spaces
+" Tabs as 2 spaces
 set expandtab
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set shiftround
 
 set backupcopy=yes
@@ -105,8 +106,6 @@ vmap gl :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR
 if has("gui_running")
   if has("gui_gtk2")
     set guifont=InconsolataForPowerline\ 11
-  elseif has("gui_macvim")
-    set guifont=Inconsolata\ Regular:h14
   elseif has("gui_win32")
     set guifont=Consolas:h11:cANSI
   endif
