@@ -28,7 +28,8 @@ Plugin 'digitaltoad/vim-jade'
 Plugin 'claco/jasmine.vim'
 Plugin 'digitaltoad/vim-pug'
 Plugin 'tikhomirov/vim-glsl'
-Plugin 'pangloss/vim-javascript'
+"Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
 
 Plugin 'tomasr/molokai'
 
@@ -36,6 +37,18 @@ Plugin 'tomasr/molokai'
 
 "Plugin 'nvie/vim-flake8'
 "Plugin 'corntrace/bufexplorer'
+
+" Plugin Configuration
+"let g:jsx_ext_required = 0
+
+let g:syntastic_debug=0
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+
+let g:airline#extensions#branch#enabled = 0
 
 call vundle#end()
 filetype plugin indent on
@@ -81,6 +94,7 @@ nnoremap <leader><space>  :MRU<cr>
 " inoremap <cr> <esc>
 " inoremap <esc> <nop>
 
+let NERDTreeIgnore = ['\.pyc$']
 nnoremap <leader>nt :NERDTreeToggle<CR>
 nnoremap <leader>nf :NERDTreeFind<CR>
 nnoremap <leader>nn :NERDTreeMirror<cr>

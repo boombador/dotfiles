@@ -1,3 +1,12 @@
+
+platform='unknown'
+unamestr=`uname`
+if [[ "$unamestr" == 'Linux' ]]; then
+   platform='linux'
+elif [[ "$unamestr" == 'Darwin' ]]; then
+   platform='macosx'
+fi
+
 # ex - archive extractor
 # usage: ex <file>
 ex () {
@@ -41,23 +50,23 @@ alias gsd='git diff --staged | vim -'
 alias ll='ls -la'
 
 export EDITOR=vim
-#export GOPATH=$HOME/gocode
-
-#export JAVA_HOME="/usr/lib/jvm/java-7-openjdk-amd64/jre"
 
 #export NVM_DIR="/home/ian/.nvm"
 #[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
-#source '/home/ian/google-cloud-sdk/path.bash.inc'
-#source '/home/ian/google-cloud-sdk/completion.bash.inc'
+if [[ $platform == 'linux' ]]; then
+  alias ack='ack-grep'
+elif [[ $platform == 'macosx' ]]; then
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+  alias isdockerflush='cat ~/Library/Containers/com.docker.docker/Data/database/com.docker.driver.amd64-linux/disk/full-sync-on-flush'
 
-# if $(determine if apple); then
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-# else
-# this breaks mac, but is needed on linux
-# FIXME: need this back for linux
-#alias ack='ack-grep'
-#fi
+  # Setting PATH for Python 3.4
+  # The orginal version is saved in .bash_profile.pysave
+  PATH="/Library/Frameworks/Python.framework/Versions/3.4/bin:${PATH}"
+  export PATH
+fi
 
-export VENUE_PORTAL_BACKEND='http://localhost:8001/api'
+
+
+
