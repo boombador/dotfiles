@@ -1,18 +1,20 @@
+" {{{ Vundle Plugins and Init
 set nocompatible
 filetype off
-
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " Passive upgrades
 Plugin 'gmarik/Vundle.vim'
 Plugin 'bling/vim-airline'
-Plugin 'scrooloose/syntastic'
+"Plugin 'scrooloose/syntastic'
 
 " Interfaces
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-fugitive'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'tomasr/molokai'
 Plugin 'yegappan/mru'
 
 " Actions
@@ -28,77 +30,108 @@ Plugin 'digitaltoad/vim-jade'
 Plugin 'claco/jasmine.vim'
 Plugin 'digitaltoad/vim-pug'
 Plugin 'tikhomirov/vim-glsl'
-"Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
+Plugin 'dadivdhalter/jedi-vim'
 
-Plugin 'tomasr/molokai'
 
 " Plugins To Try
-
+"Plugin 'pangloss/vim-javascript'
 "Plugin 'nvie/vim-flake8'
 "Plugin 'corntrace/bufexplorer'
-
 " Plugin Configuration
-"let g:jsx_ext_required = 0
-
-let g:syntastic_debug=0
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
-
-let g:airline#extensions#branch#enabled = 0
 
 call vundle#end()
 filetype plugin indent on
 syntax on
 
-highlight colorcolumn ctermbg=235 guibg=#2c2d27
-" set textwidth=80
+" }}}
+"{{{ Options
+set foldmethod=marker
 set colorcolumn=+1,100
 set background=dark
 
-" Search
-set incsearch
-set ignorecase
-set smartcase
-set hlsearch
+set incsearch " highlight partial matches as you type
+set ignorecase " don't distinguish between cases, partially overriden by smartcase
+set smartcase " search is case sensitive if uppercase letters included in term
+set hlsearch " highlight search
 
-set nu
+set number
 set laststatus=2
 set encoding=utf-8
-
-hi link EasyMotionTarget ErrorMsg
-hi link EasyMotionShade Comment
-
-" Tabs as 2 spaces
 set expandtab
+set shiftround
+
+" backupcopy deals with weirdness I don't fully understand about updating a
+" file on write, this is needed for some build system's file watcher
+set backupcopy=yes
+
+" {{{ Specific to filetype
+"
+" JS
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
-set shiftround
+" markdown
+"set textwidth=100
+" }}}
+" }}}
+" {{{ Variables
+" autocmd BufWritePost *.py call Flake8()
+let g:flake8_max_line_length=160
 
-set backupcopy=yes
+let g:syntastic_debug=0
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+
+let g:airline#extensions#branch#enabled = 0
+
+let g:ycm_key_list_select_completion = [] 
+let g:ycm_key_list_previous_completion = [] 
+
+" Python
+" Open module, e.g. :Pyimport os (opens the os module)
+let g:jedi#popup_on_dot = 0
+let g:jedi#use_tabs_not_buffers = 1
+let g:jedi#goto_command = "<leader>sd"
+let g:jedi#goto_assignments_command = "<leader>sg"
+let g:jedi#documentation_command = "<leader>sk"
+let g:jedi#usages_command = "<leader>sn"
+let g:jedi#rename_command = "<leader>sr"
+
+"let g:jsx_ext_required = 0
+
+" }}}
+" {{{ Mappings
+let mapleader=";"
 
 cabbrev W w
 cabbrev Tabe tabe
 cabbrev Wq x
 
-let mapleader=";"
+" inoremap <cr> <esc>
+" inoremap <esc> <nop>
+
 nnoremap <silent> <leader>l :noh<CR>
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <leader>` :set paste!<cr>
 nnoremap <leader><space>  :MRU<cr>
-" inoremap <cr> <esc>
-" inoremap <esc> <nop>
 
 let NERDTreeIgnore = ['\.pyc$']
 nnoremap <leader>nt :NERDTreeToggle<CR>
 nnoremap <leader>nf :NERDTreeFind<CR>
 nnoremap <leader>nn :NERDTreeMirror<cr>
 
+vnoremap <leader>/ y/\V<C-R>"<CR>
+
+" Svn blame highlighted lines in visual mode
+vnoremap gl :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
+
+" }}}
+" {{{ Autocommands and File Specific
 augroup general
     autocmd!
     autocmd FileType python     iabbrev <buffer> iff if:<left>
@@ -112,9 +145,12 @@ augroup END
 autocmd BufRead,BufNewFile *.go set filetype=go
 autocmd BufRead,BufNewFile *.go set makeprg=go\ build\ %
 
+" }}}
+" {{{ Color and Themes
+highlight colorcolumn ctermbg=235 guibg=#2c2d27
 
-" Svn blame highlighted lines in visual mode
-vmap gl :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
+hi link EasyMotionTarget ErrorMsg
+hi link EasyMotionShade Comment
 
 " not sure I'm really using this
 if has("gui_running")
@@ -131,5 +167,4 @@ if filereadable($HOME . "/.vim/bundle/molokai/colors/molokai.vim")
   colorscheme molokai
 endif
 
-" autocmd BufWritePost *.py call Flake8()
-let g:flake8_max_line_length=160
+" }}}
