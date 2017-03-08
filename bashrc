@@ -59,14 +59,13 @@ if [[ $platform == 'linux' ]]; then
 elif [[ $platform == 'macosx' ]]; then
   eval "$(pyenv init -)"
   eval "$(pyenv virtualenv-init -)"
+
   alias isdockerflush='cat ~/Library/Containers/com.docker.docker/Data/database/com.docker.driver.amd64-linux/disk/full-sync-on-flush'
+  alias e="/usr/local/Cellar/emacs/25.1/Emacs.app/Contents/MacOS/Emacs -nw" # no graphical window, terminal only
+  alias emacs="/usr/local/Cellar/emacs/25.1/Emacs.app/Contents/MacOS/Emacs"
 
   # Setting PATH for Python 3.4
   # The orginal version is saved in .bash_profile.pysave
   PATH="/Library/Frameworks/Python.framework/Versions/3.4/bin:${PATH}"
   export PATH
 fi
-
-
-
-
