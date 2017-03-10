@@ -4,41 +4,29 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" Passive upgrades
 Plugin 'gmarik/Vundle.vim'
-Plugin 'bling/vim-airline'
-"Plugin 'scrooloose/syntastic'
 
-" Interfaces
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-fugitive'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'Valloric/YouCompleteMe'
+" Interface
+Plugin 'bling/vim-airline'
 Plugin 'tomasr/molokai'
-Plugin 'yegappan/mru'
+Plugin 'NLKNguyen/papercolor-theme'
 
 " Actions
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'mileszs/ack.vim'
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-Plugin 'Lokaltog/vim-easymotion'
 Plugin 'tpope/vim-surround'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'rking/ag.vim'
+Plugin 'yegappan/mru'
+Plugin 'tpope/vim-fugitive'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
-" Language or Framework Syntax
-Plugin 'fatih/vim-go'
-Plugin 'digitaltoad/vim-jade'
+" Language and Syntax
+Plugin 'davidhalter/jedi-vim'
+Plugin 'mxw/vim-jsx'
+Plugin 'tikhomirov/vim-glsl'
 Plugin 'claco/jasmine.vim'
 Plugin 'digitaltoad/vim-pug'
-Plugin 'tikhomirov/vim-glsl'
-Plugin 'mxw/vim-jsx'
-Plugin 'dadivdhalter/jedi-vim'
-
-
-" Plugins To Try
-"Plugin 'pangloss/vim-javascript'
-"Plugin 'nvie/vim-flake8'
-"Plugin 'corntrace/bufexplorer'
-" Plugin Configuration
 
 call vundle#end()
 filetype plugin indent on
@@ -46,9 +34,20 @@ syntax on
 
 " }}}
 "{{{ Options
-set foldmethod=marker
-set colorcolumn=+1,100
+" set colorcolumn=+1,100
 set background=dark
+
+set showcmd
+set wildmenu
+set lazyredraw
+
+" TODO: scan for modelines and prompt to enable, show preview
+set modeline " enable parsing in-file vim directives (not super secure...)
+
+set foldenable
+set foldmethod=indent
+set foldlevelstart=2
+set foldnestmax=10
 
 set incsearch " highlight partial matches as you type
 set ignorecase " don't distinguish between cases, partially overriden by smartcase
@@ -56,6 +55,9 @@ set smartcase " search is case sensitive if uppercase letters included in term
 set hlsearch " highlight search
 
 set number
+set cursorline
+set relativenumber
+
 set laststatus=2
 set encoding=utf-8
 set expandtab
@@ -64,6 +66,13 @@ set shiftround
 " backupcopy deals with weirdness I don't fully understand about updating a
 " file on write, this is needed for some build system's file watcher
 set backupcopy=yes
+" this other stuff was suggested but I haven't examined
+"set noswapfile
+"set backup
+"set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+"set backupskip=/tmp/*,/private/tmp/*
+"set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+"set writebackup
 
 " {{{ Specific to filetype
 "
@@ -74,25 +83,14 @@ set shiftwidth=2
 " markdown
 "set textwidth=100
 " }}}
+"
 " }}}
 " {{{ Variables
-" autocmd BufWritePost *.py call Flake8()
-let g:flake8_max_line_length=160
-
-let g:syntastic_debug=0
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
+let g:mapleader=";"
 
 let g:airline#extensions#branch#enabled = 0
 
-let g:ycm_key_list_select_completion = [] 
-let g:ycm_key_list_previous_completion = [] 
-
 " Python
-" Open module, e.g. :Pyimport os (opens the os module)
 let g:jedi#popup_on_dot = 0
 let g:jedi#use_tabs_not_buffers = 1
 let g:jedi#goto_command = "<leader>sd"
@@ -101,43 +99,54 @@ let g:jedi#documentation_command = "<leader>sk"
 let g:jedi#usages_command = "<leader>sn"
 let g:jedi#rename_command = "<leader>sr"
 
-"let g:jsx_ext_required = 0
-
+" CtrlP settings
+let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 " }}}
 " {{{ Mappings
-let mapleader=";"
 
 cabbrev W w
 cabbrev Tabe tabe
 cabbrev Wq x
 
-" inoremap <cr> <esc>
-" inoremap <esc> <nop>
+nnoremap <leader><space> :MRU<CR>
+nnoremap <leader>` :set paste!<CR>
 
+nnoremap <leader>ev :vsplit $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
+"nnoremap <leader>nt :NERDTreeToggle<CR>
+"nnoremap <leader>nf :NERDTreeFind<CR>
+"nnoremap <leader>nn :NERDTreeMirror<CR>
 nnoremap <silent> <leader>l :noh<CR>
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
-nnoremap <leader>` :set paste!<cr>
-nnoremap <leader><space>  :MRU<cr>
 
-let NERDTreeIgnore = ['\.pyc$']
-nnoremap <leader>nt :NERDTreeToggle<CR>
-nnoremap <leader>nf :NERDTreeFind<CR>
-nnoremap <leader>nn :NERDTreeMirror<cr>
+" quickly search
+nnoremap <leader>a :Ag<space>
 
+" search for the visually highlighted text
 vnoremap <leader>/ y/\V<C-R>"<CR>
-
-" Svn blame highlighted lines in visual mode
-vnoremap gl :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
-
 " }}}
 " {{{ Autocommands and File Specific
-augroup general
+augroup filetype_python
     autocmd!
     autocmd FileType python     iabbrev <buffer> iff if:<left>
+augroup END
+
+augroup filetype_javascript
+    autocmd!
     autocmd FileType javascript iabbrev <buffer> iff if ()<left>
     autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
-    autocmd BufRead *.md let tw=100
+augroup END
+
+augroup filetype_markdown
+    autocmd!
+    autocmd BufRead,BufNewFile *.md set tw=100
+augroup END
+
+augroup filetype_go
+    autocmd!
+    autocmd BufRead,BufNewFile *.md set tw=100
 augroup END
 
 "  Go support
@@ -163,8 +172,11 @@ endif
 
 " Colors
 set t_Co=256
-if filereadable($HOME . "/.vim/bundle/molokai/colors/molokai.vim")
-  colorscheme molokai
-endif
+"if filereadable($HOME . "/.vim/bundle/molokai/colors/molokai.vim")
+  "colorscheme molokai
+"endif
+colorscheme PaperColor
 
 " }}}
+" in case I pick another fold method for shared code
+" " vim:foldmethod=marker:foldlevel=0
