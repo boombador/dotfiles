@@ -149,6 +149,12 @@ augroup filetype_go
     autocmd BufRead,BufNewFile *.md set tw=100
 augroup END
 
+augroup filetype_diff
+    autocmd!
+    autocmd BufRead,BufNewFile COMMIT_EDITMSG colorscheme molokai
+    autocmd BufRead,BufNewFile COMMIT_EDITMSG set filetype=diff
+augroup END
+
 "  Go support
 " autocmd BufWritePre *.go :Fmt " needs to be installed
 autocmd BufRead,BufNewFile *.go set filetype=go
