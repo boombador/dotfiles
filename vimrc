@@ -88,6 +88,8 @@ set shiftwidth=2
 " {{{ Variables
 let g:mapleader=";"
 
+" airline todo: learn statuline syntax to create custom sections
+
 let g:airline#extensions#branch#enabled = 0
 
 " Python
@@ -106,6 +108,11 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 " }}}
 " {{{ Mappings
+" {{{ Experimental Mappings
+nnoremap <leader>gb Gblame<CR>
+nnoremap <leader>fd colorscheme molokai | set filetype=diff
+" }}}
+
 
 cabbrev W w
 cabbrev Tabe tabe
@@ -116,10 +123,11 @@ nnoremap <leader>` :set paste!<CR>
 
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
-"nnoremap <leader>nt :NERDTreeToggle<CR>
-"nnoremap <leader>nf :NERDTreeFind<CR>
-"nnoremap <leader>nn :NERDTreeMirror<CR>
 nnoremap <silent> <leader>l :noh<CR>
+
+
+" delete all trailing whitespace in the file
+nnoremap <leader>cw :%s/\s\+$//e
 
 " quickly search
 nnoremap <leader>a :Ag<space>
