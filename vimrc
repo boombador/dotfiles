@@ -14,6 +14,9 @@ Plugin 'NLKNguyen/papercolor-theme'
 " Actions
 Plugin 'tpope/vim-surround'
 Plugin 'Lokaltog/vim-easymotion'
+Plugin 'kovisoft/slimv'
+"Plugin 'SirVer/ultisnips'
+
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'rking/ag.vim'
 Plugin 'yegappan/mru'
@@ -34,8 +37,8 @@ syntax on
 
 " }}}
 "{{{ Options
-" set colorcolumn=+1,100
 set background=dark
+"set colorcolumn=+1,100
 
 set showcmd
 set wildmenu
@@ -62,6 +65,9 @@ set laststatus=2
 set encoding=utf-8
 set expandtab
 set shiftround
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 
 " backupcopy deals with weirdness I don't fully understand about updating a
 " file on write, this is needed for some build system's file watcher
@@ -77,9 +83,6 @@ set backupcopy=yes
 " {{{ Specific to filetype
 "
 " JS
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
 " markdown
 "set textwidth=100
 " }}}
@@ -89,8 +92,17 @@ set shiftwidth=2
 let g:mapleader=";"
 
 " airline todo: learn statuline syntax to create custom sections
-
 let g:airline#extensions#branch#enabled = 0
+
+" lisp related
+let g:slimv_lisp = '/usr/bin/clisp'
+let g:slimv_impl = 'clisp'
+let g:lisp_rainbow=1
+
+"let g:UltiSnipsExpandTrigger="<c-b>"
+"let g:UltiSnipsJumpForwardTrigger="<c-z>"
+"let g:UltiSnipsJumpBackwardTrigger=""
+"let g:UltiSnipsEditSplit="vertical"
 
 " Python
 let g:jedi#popup_on_dot = 0
@@ -110,7 +122,6 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 " {{{ Mappings
 " {{{ Experimental Mappings
 nnoremap <leader>gb Gblame<CR>
-nnoremap <leader>fd colorscheme molokai | set filetype=diff
 " }}}
 
 
@@ -124,7 +135,6 @@ nnoremap <leader>` :set paste!<CR>
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 nnoremap <silent> <leader>l :noh<CR>
-
 
 " delete all trailing whitespace in the file
 nnoremap <leader>cw :%s/\s\+$//e
@@ -143,8 +153,7 @@ augroup END
 
 augroup filetype_javascript
     autocmd!
-    autocmd FileType javascript iabbrev <buffer> iff if ()<left>
-    autocmd FileType javascript nnoremap <buffer> <localleader>c I//<esc>
+    autocmd FileType javascript set tabstop=2 softtabstop=2 shiftwidth=2
 augroup END
 
 augroup filetype_markdown
@@ -155,12 +164,6 @@ augroup END
 augroup filetype_go
     autocmd!
     autocmd BufRead,BufNewFile *.md set tw=100
-augroup END
-
-augroup filetype_diff
-    autocmd!
-    autocmd BufRead,BufNewFile COMMIT_EDITMSG colorscheme molokai
-    autocmd BufRead,BufNewFile COMMIT_EDITMSG set filetype=diff
 augroup END
 
 "  Go support

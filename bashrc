@@ -50,12 +50,15 @@ alias gsd='git diff --staged | vim -'
 alias ll='ls -la'
 
 export EDITOR=vim
+export GOPATH=$HOME/src/gocode
+export PATH=$PATH:/usr/local/go/bin
 
 #export NVM_DIR="/home/ian/.nvm"
 #[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 if [[ $platform == 'linux' ]]; then
   alias ack='ack-grep'
+  alias e='emacs25'
 elif [[ $platform == 'macosx' ]]; then
   eval "$(pyenv init -)"
   eval "$(pyenv virtualenv-init -)"
@@ -69,3 +72,9 @@ elif [[ $platform == 'macosx' ]]; then
   PATH="/Library/Frameworks/Python.framework/Versions/3.4/bin:${PATH}"
   export PATH
 fi
+
+#source '/home/ian/google-cloud-sdk/path.bash.inc'
+#source '/home/ian/google-cloud-sdk/completion.bash.inc'
+
+### Added by the Heroku Toolbelt
+#export PATH="/usr/local/heroku/bin:$PATH"
