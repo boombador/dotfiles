@@ -42,7 +42,7 @@ ex () {
 # shopt -s hostcomplete
 # shopt -s nocaseglob
 
-#alias tmux='tmux -2'
+alias tmux='tmux -2'
 alias gs='git status'
 alias gd='git diff --ignore-space-change | vim -'
 alias gds='git diff | vim -'

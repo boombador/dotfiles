@@ -10,12 +10,15 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'bling/vim-airline'
 Plugin 'tomasr/molokai'
 Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'scrooloose/nerdtree'
 
 " Actions
 Plugin 'tpope/vim-surround'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'kovisoft/slimv'
 "Plugin 'SirVer/ultisnips'
+
+Plugin 'ElmCast/elm-vim'
 
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'rking/ag.vim'
@@ -124,6 +127,7 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 nnoremap <leader>gb Gblame<CR>
 " }}}
 
+nnoremap <leader>nt :NERDTreeToggle<CR>
 
 cabbrev W w
 cabbrev Tabe tabe
