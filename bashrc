@@ -48,18 +48,18 @@ alias gd='git diff --ignore-space-change | vim -'
 alias gds='git diff | vim -'
 alias gsd='git diff --staged | vim -'
 alias ll='ls -la'
+alias v='nvim'
+alias vim='nvim'
 
-export EDITOR=vim
+export EDITOR=nvim
 export GOPATH=$HOME/src/gocode
-export PATH=$PATH:/usr/local/go/bin
-
-#export NVM_DIR="/home/ian/.nvm"
-#[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export PATH=$PATH:/usr/local/go/bin:$HOME/bin
 
 if [[ $platform == 'linux' ]]; then
   alias ack='ack-grep'
   alias e='emacs25'
 elif [[ $platform == 'macosx' ]]; then
+  export PATH="/Users/ian/.pyenv/bin:$PATH"
   eval "$(pyenv init -)"
   eval "$(pyenv virtualenv-init -)"
 
@@ -76,5 +76,27 @@ fi
 #source '/home/ian/google-cloud-sdk/path.bash.inc'
 #source '/home/ian/google-cloud-sdk/completion.bash.inc'
 
-### Added by the Heroku Toolbelt
-#export PATH="/usr/local/heroku/bin:$PATH"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export MYVIMRC="$HOME/.vimrc"
+export MYTMUXCONF="$HOME/.tmux.conf"
+export MYBASHRC="$HOME/.bash_profile"  # for non-mac: .bashrc?
+export MYORGMODE="$HOME/GTD.org"
+
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
+fi
+
+# git config --global core.excludesfile ~/.gitignore_global
+# git config --global user.name
+# git config --global user.email
+
+export PATH=/Users/ian/Desktop/tower/scripts:$PATH
+
+export TOWER_DEV_DIR="/Users/ian/Desktop/tower"
+
+export PATH=/Users/ian/Desktop/tower/scripts:$PATH
+
+export TOWER_DEV_DIR="/Users/ian/Desktop/tower"
