@@ -1,42 +1,71 @@
 " {{{ Vundle Plugins and Init
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'gmarik/Vundle.vim'
+"
+call plug#begin()
 
 " Interface
-Plugin 'bling/vim-airline'
-Plugin 'tomasr/molokai'
-Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'scrooloose/nerdtree'
+Plug 'vim-airline/vim-airline'
+Plug 'tomasr/molokai'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'godlygeek/csapprox'
+Plug 'scrooloose/nerdtree'
+Plug 'jceb/vim-orgmode'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'w0rp/ale'
+
+"airblade/vim-gitgutter
 
 " Actions
-Plugin 'tpope/vim-surround'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'kovisoft/slimv'
+Plug 'tpope/vim-surround'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'kovisoft/slimv'
+Plug 'tpope/vim-speeddating'
+Plug 'scrooloose/nerdcommenter'
+Plug 'rking/ag.vim'
+Plug 'yegappan/mru'
+Plug 'tpope/vim-fugitive'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 "Plugin 'SirVer/ultisnips'
 
-Plugin 'ElmCast/elm-vim'
-
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'rking/ag.vim'
-Plugin 'yegappan/mru'
-Plugin 'tpope/vim-fugitive'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 " Language and Syntax
-Plugin 'davidhalter/jedi-vim'
-Plugin 'mxw/vim-jsx'
-Plugin 'tikhomirov/vim-glsl'
-Plugin 'claco/jasmine.vim'
-Plugin 'digitaltoad/vim-pug'
+"Plug 'neomake/neomake'
+Plug 'mxw/vim-jsx'
+Plug 'tikhomirov/vim-glsl'
+Plug 'claco/jasmine.vim'
+Plug 'digitaltoad/vim-pug'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'zchee/deoplete-jedi'
+Plug 'ElmCast/elm-vim'
+Plug 'guns/vim-clojure-static'
+Plug 'tpope/vim-fireplace'
 
-call vundle#end()
-filetype plugin indent on
-syntax on
+call plug#end()
+let g:deoplete#enable_at_startup = 1
+
+"let g:neomake_python_enabled_makers = ['flake8']
+"let g:neomake_open_list = 2
+"call neomake#configure#automake('w')
+
+let g:python_host_prog = '/Users/ian/.pyenv/versions/neovim2/bin/python'
+let g:python3_host_prog = '/Users/ian/.pyenv/versions/neovim3/bin/python'
+
+" Error and warning signs.
+let g:ale_sign_error = '⤫'
+let g:ale_sign_warning = '⚠'
+" Enable integration with airline.
+let g:airline#extensions#ale#enabled = 1
+
+let g:scheme_builtin_swank=0
+
 
 " }}}
 "{{{ Options
@@ -50,10 +79,10 @@ set lazyredraw
 " TODO: scan for modelines and prompt to enable, show preview
 set modeline " enable parsing in-file vim directives (not super secure...)
 
-set foldenable
-set foldmethod=indent
-set foldlevelstart=2
-set foldnestmax=10
+"set foldenable
+"set foldmethod=indent
+"set foldlevelstart=2
+"set foldnestmax=10
 
 set incsearch " highlight partial matches as you type
 set ignorecase " don't distinguish between cases, partially overriden by smartcase
@@ -108,13 +137,13 @@ let g:lisp_rainbow=1
 "let g:UltiSnipsEditSplit="vertical"
 
 " Python
-let g:jedi#popup_on_dot = 0
-let g:jedi#use_tabs_not_buffers = 1
-let g:jedi#goto_command = "<leader>sd"
-let g:jedi#goto_assignments_command = "<leader>sg"
-let g:jedi#documentation_command = "<leader>sk"
-let g:jedi#usages_command = "<leader>sn"
-let g:jedi#rename_command = "<leader>sr"
+"let g:jedi#popup_on_dot = 0
+"let g:jedi#use_tabs_not_buffers = 1
+"let g:jedi#goto_command = "<leader>sd"
+"let g:jedi#goto_assignments_command = "<leader>sg"
+"let g:jedi#documentation_command = "<leader>sk"
+"let g:jedi#usages_command = "<leader>sn"
+"let g:jedi#rename_command = "<leader>sr"
 
 " CtrlP settings
 let g:ctrlp_match_window = 'bottom,order:ttb'
@@ -124,21 +153,30 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 " }}}
 " {{{ Mappings
 " {{{ Experimental Mappings
-nnoremap <leader>gb Gblame<CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gb :Gblame<CR>
 " }}}
 
+nnoremap <leader>nf :NERDTreeFind<CR>
 nnoremap <leader>nt :NERDTreeToggle<CR>
 
 cabbrev W w
 cabbrev Tabe tabe
 cabbrev Wq x
 
+"nnoremap <leader>b :Neomake!<CR>
+
 nnoremap <leader><space> :MRU<CR>
 nnoremap <leader>` :set paste!<CR>
 
-nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
+nnoremap <leader>ev :vsplit $MYVIMRC<CR>
+nnoremap <leader>et :vsplit $MYTMUXCONF<CR>
+nnoremap <leader>eb :vsplit $MYBASHRC<CR>
+nnoremap <leader>eo :vsplit $MYORGMODE<CR>
 nnoremap <silent> <leader>l :noh<CR>
+
+nnoremap <leader>pi :PlugInstall<CR>
 
 " delete all trailing whitespace in the file
 nnoremap <leader>cw :%s/\s\+$//e
@@ -148,6 +186,28 @@ nnoremap <leader>a :Ag<space>
 
 " search for the visually highlighted text
 vnoremap <leader>/ y/\V<C-R>"<CR>
+
+" Plugin key-mappings.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+"smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+"\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=0
+  " set concealcursor=niv
+endif
+
 " }}}
 " {{{ Autocommands and File Specific
 augroup filetype_python
@@ -165,15 +225,20 @@ augroup filetype_markdown
     autocmd BufRead,BufNewFile *.md set tw=100
 augroup END
 
-augroup filetype_go
-    autocmd!
-    autocmd BufRead,BufNewFile *.md set tw=100
-augroup END
+"augroup filetype_go
+    "autocmd!
+    "autocmd BufRead,BufNewFile *.md set tw=100
+"augroup END
 
 "  Go support
-" autocmd BufWritePre *.go :Fmt " needs to be installed
-autocmd BufRead,BufNewFile *.go set filetype=go
-autocmd BufRead,BufNewFile *.go set makeprg=go\ build\ %
+"autocmd BufWritePre *.go :Fmt " needs to be installed
+"autocmd BufRead,BufNewFile *.go set filetype=go
+"autocmd BufRead,BufNewFile *.go set makeprg=go\ build\ %
+
+let g:go_auto_sameids = 1
+let g:go_fmt_command = "goimports"
+let g:go_addtags_transform = "snakecase"
+let g:go_snippet_engine = "neosnippet"
 
 " }}}
 " {{{ Color and Themes
@@ -200,4 +265,3 @@ colorscheme PaperColor
 
 " }}}
 " in case I pick another fold method for shared code
-" " vim:foldmethod=marker:foldlevel=0
