@@ -17,12 +17,47 @@ fi
 git clone https://github.com/boombador/dotfiles.git ~/dev/dotfiles
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-# backup existing files and replace with symlinks to the repo
-if [ -e ~/.bashrc ]; then cp --interactive ~/.bashrc ~/bashrc.bak; fi
-if [ -e ~/.vimrc ]; then cp --interactive ~/.vimrc ~/vimrc.bak; fi
-if [ -e ~/.tmux.conf ]; then cp --interactive ~/.tmux.conf ~/tmux.conf.bak; fi
-ln -s ~/dev/dotfiles/bashrc .bashrc
-ln -s ~/dev/dotfiles/vimrc .vimrc
-ln -s ~/dev/dotfiles/tmux.conf .tmux.conf
+function backup () {
+    src="$1"
+    dest="${src}.bak"
+    if [ -e $dest ]; then
+        echo "Backup file $dest already exists, skipping..."
+        return 1
+    fi
+
+    if [ -e $src ]; then
+        cp --interactive $src $dest
+    fi
+}
+
+function link () {
+    dotfiles="$1"
+    filename="$2"
+    src="$dotfiles/$filename"
+    dest=".$filename"
+    
+    #if [ -e $dest ]; then
+        #echo "Backup file $dest already exists, exiting..."
+        #exit 1
+    #fi
+
+    #if [ -e $src ]; then
+        #cp --interactive $src $dest
+    #fi
+
+    ln -s $src $dest
+}
+
+ln -s $HOME/Code/dotfiles/bashrc .bashrc
+
+DOTFILES="$HOME/Code/dotfiles"
+
+backup $HOME/.bashrc
+backup $HOME/.vimrc
+backup $HOME/.tmux.conf
+
+link $DOTFILES "bashrc"
+link $DOTFILES "vimrc"
+link $DOTFILES "tmux.conf"
 
 vim +PluginInstall +qall

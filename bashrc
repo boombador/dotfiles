@@ -17,6 +17,7 @@ export MYNOTESSCRATCH="$HOME/Notes/scratch.md"
 . $MYDOTFILES/bash/java.sh
 . $MYDOTFILES/bash/golang.sh
 . $MYDOTFILES/bash/node.sh
+. $MYDOTFILES/bash/git.sh
 . $MYDOTFILES/bash/docker.sh
 . $MYDOTFILES/bash/editor.sh
 
