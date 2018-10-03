@@ -49,15 +49,16 @@ function linkDir () {
     
     # error checking?
     ln -s $src $dest
+    #ln -s /Users/ian/Code/dotfiles/hammerspoon/ ~/.hammerspoon
 }
-#ln -s /Users/ian/Code/dotfiles/hammerspoon/ ~/.hammerspoon
 
-
-DOTFILES="$HOME/Code/dotfiles"
+CODE="${HOME}/Code"
+DOTFILES="${CODE}/dotfiles"
 
 backup $HOME/.bashrc
 backup $HOME/.vimrc
 backup $HOME/.tmux.conf
+backup $HOME/.hammerspoon
 
 link $DOTFILES "bashrc"
 link $DOTFILES "vimrc"
