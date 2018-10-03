@@ -46,4 +46,5 @@ if [ -f ~/work_config.sh ]; then
 fi
 
 initProjectSession admin $NOTES
+initProjectSession dots $MYDOTFILES
 attachAfterCreate admin

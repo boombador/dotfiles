@@ -41,7 +41,17 @@ function link () {
     ln -s $src $dest
 }
 
-ln -s $HOME/Code/dotfiles/bashrc .bashrc
+function linkDir () {
+    dotfiles="$1"
+    dirname="$2"
+    src="$dotfiles/$dirname/"
+    dest=".$dirname"
+    
+    # error checking?
+    ln -s $src $dest
+}
+#ln -s /Users/ian/Code/dotfiles/hammerspoon/ ~/.hammerspoon
+
 
 DOTFILES="$HOME/Code/dotfiles"
 
@@ -52,5 +62,6 @@ backup $HOME/.tmux.conf
 link $DOTFILES "bashrc"
 link $DOTFILES "vimrc"
 link $DOTFILES "tmux.conf"
+linkDir $DOTFILES "hammerspoon"
 
 vim +PluginInstall +qall
