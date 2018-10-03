@@ -1,13 +1,17 @@
 #!/usr/bin/env bash
 
-export EDITOR="nvim"
-
+emacs_command=""
 if [[ $DETECTED_PLATFORM == 'linux' ]]; then
-    alias e='emacs25'
+    emacs_command="emacs"
 elif [[ $DETECTED_PLATFORM == 'macosx' ]]; then
-    alias e="/usr/local/Cellar/emacs/25.1/Emacs.app/Contents/MacOS/Emacs -nw" # no graphical window, terminal only
-    alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
-    #alias emacs="/usr/local/Cellar/emacs/25.1/Emacs.app/Contents/MacOS/Emacs"
+    emacs_command="/Applications/Emacs.app/Contents/MacOS/Emacs"
 fi
-alias v='nvim'
-alias vim='nvim'
+
+vim_command="nvim"
+
+alias e="$emacs_command -nw"
+alias v="$vim_command"
+alias vi="$vim_command"
+alias vim="$vim_command"
+
+export EDITOR="$vim_command"

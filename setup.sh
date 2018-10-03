@@ -22,6 +22,7 @@ function backup () {
     dest="${src}.bak"
     if [ -e $dest ]; then
         echo "Backup file $dest already exists, skipping..."
+        # create new temp file?
         return 1
     fi
 
@@ -36,15 +37,7 @@ function link () {
     src="$dotfiles/$filename"
     dest=".$filename"
     
-    #if [ -e $dest ]; then
-        #echo "Backup file $dest already exists, exiting..."
-        #exit 1
-    #fi
-
-    #if [ -e $src ]; then
-        #cp --interactive $src $dest
-    #fi
-
+    # error checking?
     ln -s $src $dest
 }
 

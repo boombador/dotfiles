@@ -1,21 +1,5 @@
 #!/usr/bin/env bash
 
-function detectPlatform {
-    platform="unknown"
-    unamestr=${uname}
-
-    echo "$unamestr"
-    if [[ "$unamestr" == 'Linux' ]]; then
-        platform="linux"
-    elif [[ "$unamestr" == 'Darwin' ]]; then
-        platform="macosx"
-    else
-        echo "Unknown platform: $platform"
-    fi
-
-    export DETECTED_PLATFORM=$platform
-}
-
 # ex - archive extractor
 # usage: ex <file>
 ex () {
@@ -45,5 +29,43 @@ function sourceIfFile () {
 
     if [ -f $file_path ]; then
         . $file_path
+    fi
+}
+
+function initProjectSession () {
+    local PROJECT_NAME="$1"
+    local PROJECT_DIR="$2"
+    local CONFIG_OVERRIDE="$3"  # if not empty, use instead of searching in dotfiles
+
+    local TMUX_CONFIG="${DOTFILES}/tmux/${PROJECT_NAME}.conf"
+    if [ ! -z $CONFIG_OVERRIDE ]; then
+        TMUX_CONFIG=$CONFIG_OVERRIDE
+    fi
+
+    tmux has-session -t $PROJECT_NAME 2>/dev/null
+    if [ "$?" -eq 1 ] ; then
+        echo "No Session found.  Creating..."
+        pushd $PROJECT_DIR
+        tmux new-session -d -s $PROJECT_NAME
+        if [ -f $TMUX_CONFIG ]; then
+            echo "and configuring with $TMUX_CONFIG..."
+            tmux source-file $TMUX_CONFIG
+        fi
+        popd
+    else
+        echo "Session $PROJECT_NAME found"
+    fi
+}
+
+function attachAfterCreate () {
+    PROJECT_NAME="$1"
+    if [ -z "$TMUX" ]; then
+        if tmux has-session -t $PROJECT_NAME 2>/dev/null; then
+            echo "about to attach"
+            tmux -2 attach-session -t $PROJECT_NAME
+        else
+            echo "about to create"
+            tmux -2 new-session -A -s $PROJECT_NAME
+        fi
     fi
 }
