@@ -30,15 +30,15 @@ export MYNOTESSCRATCH="$NOTES/scratch.md"
 # export PS1='[\u@\h \W]\$ '
 
 . $MYDOTFILES/bash/helpers.sh
-. $MYDOTFILES/bash/java.sh
-. $MYDOTFILES/bash/python.sh
-. $MYDOTFILES/bash/golang.sh
-. $MYDOTFILES/bash/node.sh
-. $MYDOTFILES/bash/git.sh
 . $MYDOTFILES/bash/docker.sh
 . $MYDOTFILES/bash/editor.sh
+. $MYDOTFILES/bash/golang.sh
+. $MYDOTFILES/bash/git.sh
+. $MYDOTFILES/bash/java.sh
+. $MYDOTFILES/bash/node.sh
+. $MYDOTFILES/bash/python.sh
+. $MYDOTFILES/bash/tmux.sh
 
-alias tmux='tmux -2'
 alias ll='ls -lha'
 
 if [ -f ~/work_config.sh ]; then
