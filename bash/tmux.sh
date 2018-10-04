@@ -49,3 +49,7 @@ function attachAfterCreate () {
         tmux new-session -A -s $PROJECT_NAME
     fi
 }
+
+function tmux_shutdown () {
+    tmux kill-server
+}

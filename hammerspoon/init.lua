@@ -10,7 +10,12 @@ local dualMonitorLayout = {
     {"Terminal",        nil,    monitorScreen, hs.geometry.rect(0, 0, 2 * third, 1), nil, nil},
 }
 
-
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "S", function()
+    hs.application.open("slack")
+    hs.application.open("terminal")
+    hs.application.open("spotify")
+    hs.application.open("Google Chrome")
+end)
 
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "W", function()
     hs.layout.apply(dualMonitorLayout)		   
