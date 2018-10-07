@@ -45,6 +45,13 @@ if [ -f ~/work_config.sh ]; then
   . ~/work_config.sh
 fi
 
-initProjectSession admin $NOTES
-initProjectSession dots $MYDOTFILES
-attachAfterCreate admin
+function goodmorning () {
+    initProjectSession admin $NOTES
+    initProjectSession dots $MYDOTFILES
+    attachAfterCreate admin
+    workInit
+}
+
+function goodnight () {
+    tmux_shutdown
+}

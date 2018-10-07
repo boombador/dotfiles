@@ -13,3 +13,9 @@ alias co='git checkout'
 if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
+
+function cleanRemoteBranches () {
+    git remote prune origin
+    echo "Branches to delete:"
+    git branch -va | awk '/\[gone\]/ {print $1}'
+}
