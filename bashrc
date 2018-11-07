@@ -19,6 +19,7 @@ export CODE="$HOME/Code"
 export MYDOTFILES="$CODE/dotfiles"
 export REPOS_DIR="$HOME/Code"
 export PATH="$HOME/bin:$PATH"
+export WORKBASHRC="$HOME/work_config.sh"
 
 export MYVIMRC="$HOME/.vimrc"
 export MYTMUXCONF="$HOME/.tmux.conf"
@@ -41,15 +42,20 @@ export MYNOTESSCRATCH="$NOTES/scratch.md"
 
 alias ll='ls -lha'
 
-if [ -f ~/work_config.sh ]; then
-  . ~/work_config.sh
+if [ -f $WORKBASHRC ]; then
+  . $WORKBASHRC
 fi
 
 function goodmorning () {
     initProjectSession admin $NOTES
     initProjectSession dots $MYDOTFILES
-    attachAfterCreate admin
-    workInit
+
+    REQUESTED_TMUX_SESSION="$(workInit)"
+    if [ -z $REQUESTED_TMUX_SESSION ]; then
+        attachAfterCreate admin
+    else
+        attachAfterCreate $REQUESTED_TMUX_SESSION
+    fi
 }
 
 function goodnight () {
