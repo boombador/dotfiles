@@ -55,8 +55,8 @@ let g:deoplete#enable_at_startup = 1
 "let g:neomake_open_list = 2
 "call neomake#configure#automake('w')
 
-let g:python_host_prog = '/Users/ian/.pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/Users/ian/.pyenv/versions/neovim3/bin/python'
+"let g:python_host_prog = '/Users/ian/.pyenv/versions/neovim2/bin/python'
+"let g:python3_host_prog = '/Users/ian/.pyenv/versions/neovim3/bin/python'
 
 " Error and warning signs.
 let g:ale_sign_error = '⤫'

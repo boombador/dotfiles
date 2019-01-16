@@ -25,7 +25,7 @@ export MYVIMRC="$HOME/.vimrc"
 export MYTMUXCONF="$HOME/.tmux.conf"
 export MYBASHRC="$HOME/.bash_profile"  # for non-mac: .bashrc?
 export MYORGMODE="$HOME/GTD.org"
-export NOTES="$HOME/Notes"
+export NOTES="$HOME/workspace"
 export MYNOTESSCRATCH="$NOTES/scratch.md"
 
 # export PS1='[\u@\h \W]\$ '
@@ -42,22 +42,24 @@ export MYNOTESSCRATCH="$NOTES/scratch.md"
 
 alias ll='ls -lha'
 
+STARTING_TMUX_SESSION=admin
 if [ -f $WORKBASHRC ]; then
-  . $WORKBASHRC
+    . $WORKBASHRC
+    WORK_TMUX_DEFAULT_SESSION="$(workInit)"
+    
+    if [ ! -z "${WORK_TMUX_DEFAULT_SESSION}" ]; then
+        STARTING_TMUX_SESSION="$WORK_TMUX_DEFAULT_SESSION"
+    fi
 fi
 
 function goodmorning () {
-    initProjectSession admin $NOTES
-    initProjectSession dots $MYDOTFILES
-
-    REQUESTED_TMUX_SESSION="$(workInit)"
-    if [ -z $REQUESTED_TMUX_SESSION ]; then
-        attachAfterCreate admin
-    else
-        attachAfterCreate $REQUESTED_TMUX_SESSION
-    fi
+    #initProjectSession admin $NOTES
+    #initProjectSession dots $MYDOTFILES
+    attachAfterCreate $STARTING_TMUX_SESSION
 }
 
 function goodnight () {
     tmux_shutdown
 }
+
+export PATH="$HOME/.cargo/bin:$PATH"
