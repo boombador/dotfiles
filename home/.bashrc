@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# xmodmap ~/.xmodmap
+
 function detectPlatform {
     local platform="unknown"
     local unamestr=$(uname)

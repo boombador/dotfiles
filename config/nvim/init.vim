@@ -1,6 +1,6 @@
 " {{{ Vundle Plugins and Init
 "
-call plug#begin()
+call plug#begin('~/.vim/plugged')
 
 " Interface
 Plug 'vim-airline/vim-airline'
