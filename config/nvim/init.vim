@@ -2,6 +2,8 @@
 "
 call plug#begin('~/.vim/plugged')
 
+" inccommand nosplit
+
 " Interface
 Plug 'vim-airline/vim-airline'
 Plug 'tomasr/molokai'
@@ -19,6 +21,7 @@ endif
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'w0rp/ale'
+Plug 'jremmen/vim-ripgrep'
 
 "airblade/vim-gitgutter
 
@@ -43,10 +46,12 @@ Plug 'tikhomirov/vim-glsl'
 Plug 'claco/jasmine.vim'
 Plug 'digitaltoad/vim-pug'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'zchee/deoplete-jedi'
+"Plug 'zchee/deoplete-jedi'
 Plug 'ElmCast/elm-vim'
 Plug 'guns/vim-clojure-static'
 Plug 'tpope/vim-fireplace'
+
+Plug 'cakebaker/scss-syntax.vim'
 
 call plug#end()
 let g:deoplete#enable_at_startup = 1
@@ -57,6 +62,9 @@ let g:deoplete#enable_at_startup = 1
 
 "let g:python_host_prog = '/Users/ian/.pyenv/versions/neovim2/bin/python'
 "let g:python3_host_prog = '/Users/ian/.pyenv/versions/neovim3/bin/python'
+let g:python_host_prog  = '/home/ian/.pyenv/versions/python2-venv/bin/python'
+let g:python3_host_prog = '/home/ian/.pyenv/versions/python3-venv/bin/python'
+
 
 " Error and warning signs.
 let g:ale_sign_error = '⤫'
@@ -146,10 +154,18 @@ let g:lisp_rainbow=1
 "let g:jedi#rename_command = "<leader>sr"
 
 " CtrlP settings
+
+if executable('rg')
+  set grepprg=rg\ --color=never
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  let g:ctrlp_use_caching = 0
+endif
+
+" do I need these?
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+"let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 " }}}
 " {{{ Mappings
 " {{{ Experimental Mappings
@@ -265,3 +281,4 @@ colorscheme PaperColor
 
 " }}}
 " in case I pick another fold method for shared code
+"

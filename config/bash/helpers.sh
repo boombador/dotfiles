@@ -31,3 +31,9 @@ function sourceIfFile () {
         . $file_path
     fi
 }
+
+# https://superuser.com/questions/288320/whats-like-osxs-pbcopy-for-linux (can use xsel or xclip)
+alias pbcopy='xsel --clipboard --input'
+alias pbpaste='xsel --clipboard --output'
+# alias pbcopy='xclip -selection clipboard'
+# alias pbpaste='xclip -selection clipboard -o'

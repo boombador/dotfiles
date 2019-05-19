@@ -19,16 +19,16 @@ detectPlatform
 
 export CODE="$HOME/Code"
 export MYDOTFILES="$CODE/dotfiles"
-export REPOS_DIR="$HOME/Code"
 export PATH="$HOME/bin:$PATH"
 export WORKBASHRC="$HOME/work_config.sh"
-
-export MYVIMRC="$HOME/.vimrc"
 export MYTMUXCONF="$HOME/.tmux.conf"
-export MYBASHRC="$HOME/.bash_profile"  # for non-mac: .bashrc?
+
+# update these
 export MYORGMODE="$HOME/GTD.org"
 export NOTES="$HOME/workspace"
 export MYNOTESSCRATCH="$NOTES/scratch.md"
+export MYVIMRC="$MYDOTFILES/config/nvim/init.vim"
+export MYBASHRC="$HOME/.bash_profile"  # for non-mac: .bashrc?
 
 # export PS1='[\u@\h \W]\$ '
 
