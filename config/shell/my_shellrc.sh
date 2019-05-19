@@ -36,15 +36,15 @@ export MYBASHRC="$HOME/.bash_profile"  # for non-mac: .bashrc?
 # export PS1='[\u@\h \W]\$ '
 
 # should be in the same directory
-. $HOME/.config/bash/helpers.sh
-. $HOME/.config/bash/docker.sh
-. $HOME/.config/bash/editor.sh
-. $HOME/.config/bash/golang.sh
-. $HOME/.config/bash/git.sh
-. $HOME/.config/bash/java.sh
-. $HOME/.config/bash/node.sh
-. $HOME/.config/bash/python.sh
-. $HOME/.config/bash/tmux.sh
+. $HOME/.config/shell/helpers.sh
+. $HOME/.config/shell/docker.sh
+. $HOME/.config/shell/editor.sh
+. $HOME/.config/shell/golang.sh
+. $HOME/.config/shell/git.sh
+. $HOME/.config/shell/java.sh
+. $HOME/.config/shell/node.sh
+. $HOME/.config/shell/python.sh
+. $HOME/.config/shell/tmux.sh
 
 alias ll='ls -lha'
 

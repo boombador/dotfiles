@@ -1,4 +1,4 @@
 
 # which should go first?
-. $HOME/.config/bash/my_zshrc.sh
-. $HOME/.config/bash/my_shellrc.sh
+. $HOME/.config/shell/my_zshrc.sh
+. $HOME/.config/shell/my_shellrc.sh

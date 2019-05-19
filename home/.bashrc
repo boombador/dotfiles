@@ -1,2 +1,2 @@
-. $HOME/.config/bash/my_shellrc.sh
-. $HOME/.config/bash/my_bashrc.sh
+. $HOME/.config/shell/my_shellrc.sh
+. $HOME/.config/shell/my_bashrc.sh
