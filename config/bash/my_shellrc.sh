@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# this is for shell agnostic code and so far that means bash and zsh,
+# though support for zsh is almost completely untested
+
 # xmodmap ~/.xmodmap
 
 function detectPlatform {
@@ -65,4 +68,17 @@ function goodnight () {
     tmux_shutdown
 }
 
+# rust tool
 export PATH="$HOME/.cargo/bin:$PATH"
+
+# Install Ruby Gems to ~/gems
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
+
+# python : pyenv (rbenv or nvm-like tool)
+export PATH="/home/ian/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+# python : poetry (cargo-like tool)
+export PATH="$HOME/.poetry/bin:$PATH"

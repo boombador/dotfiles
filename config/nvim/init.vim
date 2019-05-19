@@ -2,6 +2,8 @@
 "
 call plug#begin('~/.vim/plugged')
 
+Plug '~/Code/python-plugin-vim', { 'do': ':UpdateRemotePlugins' }
+
 " inccommand nosplit
 
 " Interface
