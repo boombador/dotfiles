@@ -2,7 +2,9 @@
 "
 call plug#begin('~/.vim/plugged')
 
-Plug '~/Code/python-plugin-vim', { 'do': ':UpdateRemotePlugins' }
+" to try
+" ultisnips
+" Plug 'smkent/vim-pipe-preview'
 
 " inccommand nosplit
 
