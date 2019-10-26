@@ -1,68 +1,53 @@
-my_needed_commands="git vim tmux"
-
-missing_counter=0
-for needed_command in $my_needed_commands; do
-    if ! hash "$needed_command" >/dev/null 2>&1; then
-        printf "Command not found in PATH: %s\n" "$needed_command" >&2
-        ((missing_counter++))
-        # TODO detect package manager and ask whether to install packages
-    fi
-done
-
-if ((missing_counter > 0)); then
-    printf "%d required commands are missing in PATH, aborting\n" "$missing_counter" >&2
-    exit 1
-fi
-
-git clone https://github.com/boombador/dotfiles.git ~/dev/dotfiles
-git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
-function backup () {
-    src="$1"
-    dest="${src}.bak"
-    if [ -e $dest ]; then
-        echo "Backup file $dest already exists, skipping..."
-        # create new temp file?
-        return 1
-    fi
-
-    if [ -e $src ]; then
-        cp --interactive $src $dest
-    fi
-}
-
-function link () {
-    dotfiles="$1"
-    filename="$2"
-    src="$dotfiles/$filename"
-    dest=".$filename"
-    
-    # error checking?
-    ln -s $src $dest
-}
-
-function linkDir () {
-    dotfiles="$1"
-    dirname="$2"
-    src="$dotfiles/$dirname/"
-    dest=".$dirname"
-    
-    # error checking?
-    ln -s $src $dest
-    #ln -s /Users/ian/Code/dotfiles/hammerspoon/ ~/.hammerspoon
-}
+#/usr/bin/env bash
 
 CODE="${HOME}/Code"
 DOTFILES="${CODE}/dotfiles"
 
-backup $HOME/.bashrc
-backup $HOME/.vimrc
-backup $HOME/.tmux.conf
-backup $HOME/.hammerspoon
+function require_commands () {
+    NEEDED_COMMANDS=$1
+    local missing_counter=0
+    for needed_command in $NEEDED_COMMANDS; do
+        if ! hash "$needed_command" >/dev/null 2>&1; then
+            printf "Command not found in PATH: %s\n" "$needed_command" >&2
+            ((missing_counter++))
+            # TODO detect package manager and ask whether to install packages
+        fi
+    done
 
-link $DOTFILES "bashrc"
-link $DOTFILES "vimrc"
-link $DOTFILES "tmux.conf"
-linkDir $DOTFILES "hammerspoon"
+    if ((missing_counter > 0)); then
+        printf "%d required commands are missing in PATH, aborting\n" "$missing_counter" >&2
+        exit 1
+    fi
+}
+
+function install_config_files () {
+	stow --target=$HOME --dir=stow-directory home
+}
+
+function install_neovim_plugin_manager () {
+	curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+}
+
+
+function install_linux_deps () {
+    sudo apt-get update
+    sudo apt-get install git build-essential openssh-server vim tmux
+}
+
+function configure_git () {
+    git config --global user.email "ian.p.mclaughlin@gmail.com"
+    git config --global user.name "Ian McLaughlin"
+}
+
+# wget https://raw.githubusercontent.com/boombador/dotfiles/master/setup.sh
+
+require_commands "git vim tmux stow nvim"
+install_config_files
+install_neovim_plugin_manager
+
+
+git clone https://github.com/boombador/dotfiles.git $DOTFILES
+# git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 vim +PluginInstall +qall
