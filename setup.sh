@@ -21,7 +21,7 @@ function require_commands () {
 }
 
 function install_config_files () {
-	stow --target=$HOME --dir=stow-directory home
+	stow --target=$HOME --dir=${DOTFILES}/stow-directory home
 }
 
 function install_neovim_plugin_manager () {
