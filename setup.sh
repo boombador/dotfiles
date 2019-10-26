@@ -20,8 +20,15 @@ function require_commands () {
     fi
 }
 
-function install_config_files () {
+function stow_install () {
 	stow --target=$HOME --dir=${DOTFILES}/stow-directory home
+
+	echo "Uninstall with following command:"
+	echo stow -D '--target=$HOME' --dir=$CODE/dotfiles/stow-directory home
+}
+
+function stow_uninstall () {
+	stow -D --target=$HOME --dir=$CODE/dotfiles/stow-directory home
 }
 
 function install_neovim_plugin_manager () {
@@ -43,11 +50,7 @@ function configure_git () {
 # wget https://raw.githubusercontent.com/boombador/dotfiles/master/setup.sh
 
 require_commands "git vim tmux stow nvim"
-install_config_files
-install_neovim_plugin_manager
-
-
 git clone https://github.com/boombador/dotfiles.git $DOTFILES
-# git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
-vim +PluginInstall +qall
+stow_install
+install_neovim_plugin_manager
+nvim +PluginInstall +qall
