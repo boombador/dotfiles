@@ -4,16 +4,11 @@ dotfiles
 Setup
 ------
 
-Download the latest setup script with `curl` and peruse the file for anything
-disagreeable.
+Download the latest setup script with `curl` and peruse the file at your leisure
+for anything disagreeable, then run the script once you're satisfied.
 
 ```
 curl https://raw.githubusercontent.com/boombador/dotfiles/master/setup.sh -O
-```
-
-Run the script to install the dotfiles in this repository. 
-
-```
 bash setup.sh
 ```
 
